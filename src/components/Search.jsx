@@ -158,6 +158,7 @@ function Search() {
               ))}
             </Masonry>
           </div>
+          
         </div>
       </div>
     </div>
