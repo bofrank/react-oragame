@@ -115,6 +115,7 @@ function Search() {
             </div>
           </form>
 
+
           {loading && <p style={{ marginTop: "1rem" }}>Loading...</p>}
 
           {promo && (
@@ -147,7 +148,7 @@ function Search() {
             </a>
           )}
 
-          <div style={{ marginTop: "2rem" }}>
+          <div style={{ marginTop: "0px" }}>
             {!loading && recipes.length === 0 && ingredient && (
               <p>No recipes found for “{ingredient}”</p>
             )}
