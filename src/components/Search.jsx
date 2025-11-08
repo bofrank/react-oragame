@@ -93,8 +93,6 @@ function Search() {
           </div>
         </header>
 
-        <div id="hero-gradient" />
-
         <div id="hero-search">
           <h2>Discover the best recipes</h2>
 

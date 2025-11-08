@@ -19,14 +19,8 @@ html {
   min-height: 80rem;
 }
 
-header {
-  text-align: center;
-  margin: 3rem 0;
-}
-
 header img {
   height: 5rem;
-  width: 10rem;
   object-fit: cover;
 }
 
@@ -152,8 +146,6 @@ main h2 {
 
 /* from css/styles.css */
 
-
-
 a:hover {
   text-decoration: none;
 }
@@ -163,12 +155,11 @@ a:hover {
 }
 
 .bg {
-  background-image: url("../images/cabinet-contemporary-counter-1080721.jpg");
+  background-image:linear-gradient(to bottom, rgba(10, 10, 10, 0.80), rgba(10, 10, 10, 0.01)), url("./assets/cabinet-contemporary-counter-1080721.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   overflow: hidden;
-  background-color: #f9f9f9;
   position: absolute;
   top: 0;
   width: 100%;
