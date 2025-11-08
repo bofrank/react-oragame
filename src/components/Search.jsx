@@ -147,7 +147,7 @@ function Search() {
               columnClassName="grid-column"
             >
               {recipes.map((r) => (
-                <div className="grid-item" key={r.idMeal}>
+                <div className="grid-item" key={r.idMeal} onClick={r.link}>
                   <img
                     src={r.strMealThumb}
                     alt={r.strMeal}
@@ -158,7 +158,7 @@ function Search() {
               ))}
             </Masonry>
           </div>
-          
+
         </div>
       </div>
     </div>

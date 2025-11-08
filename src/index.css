@@ -1937,6 +1937,7 @@ b {
 .grid-item:hover {
   transform: translateY(-4px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
 }
 
 .grid-item-image {
@@ -1951,11 +1952,6 @@ b {
   text-align: center;
   font-size: 1rem;
   color: #333;
-}
-
-
-.grid-item {
-  border: 2px solid red;
 }
 
 .grid {
