@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import Masonry from "react-masonry-css";
 import bgImage from "../assets/cabinet-contemporary-counter-1080721.jpg";
+
+// API: https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken
 
 function Search() {
   const [ingredient, setIngredient] = useState("");
@@ -7,18 +10,13 @@ function Search() {
   const [loading, setLoading] = useState(false);
   const [promo, setPromo] = useState(null);
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    await loadRecipes();
-  };
-
-  const handleChange = (e) => {
-    setIngredient(e.target.value);
-  };
-
-  const loadRecipes = async () => {
     if (!ingredient.trim()) return;
+    await loadRecipes();
+  }
 
+  async function loadRecipes() {
     setLoading(true);
     setRecipes([]);
 
@@ -28,10 +26,10 @@ function Search() {
       const response = await fetch(recipeUrl);
       const data = await response.json();
 
-      // ✅ TheMealDB returns data.meals (array or null)
+      // Set recipes
       setRecipes(data.meals || []);
 
-      // 🎁 Promo logic (unchanged)
+      // Optional: promo logic
       let promoHTML = null;
       if (ingredient === "lemon") {
         promoHTML = {
@@ -64,13 +62,22 @@ function Search() {
     } finally {
       setLoading(false);
     }
+  }
+
+  const breakpointColumnsObj = {
+    default: 5,
+    900: 2,
+    600: 1,
   };
 
   return (
     <div className="section-header">
       <div id="hero" className="section-home">
         <div id="hero-bg">
-          <div className="bg" style={{ backgroundImage: `url(${bgImage})` }} />
+          <div
+            className="bg"
+            style={{ backgroundImage: `url(${bgImage})` }}
+          />
         </div>
 
         <div id="hero-gradient" />
@@ -88,7 +95,7 @@ function Search() {
                   <input
                     type="text"
                     value={ingredient}
-                    onChange={handleChange}
+                    onChange={(e) => setIngredient(e.target.value)}
                     placeholder="What ingredient do you want to use?"
                     className="form-control input-lg form-control-icon icon-location"
                   />
@@ -97,20 +104,31 @@ function Search() {
             </div>
           </form>
 
-          {loading && <p>Loading...</p>}
+          {loading && <p style={{ marginTop: "1rem" }}>Loading...</p>}
 
           {promo && (
             <a
               href={promo.link}
               target="_blank"
               rel="noreferrer"
-              className="item photo promo-card"
+              className="promo-item"
+              style={{
+                display: "block",
+                margin: "2rem auto",
+                maxWidth: "300px",
+                textDecoration: "none",
+                color: "inherit",
+              }}
             >
               <div className="content">
                 <img
                   src={promo.image}
                   alt={promo.title}
-                  className="grid-item-image"
+                  style={{
+                    width: "100%",
+                    borderRadius: "8px",
+                    marginBottom: "0.5rem",
+                  }}
                 />
                 <div className="grid-item-title">{promo.title}</div>
                 <div className="grid-text">{promo.text}</div>
@@ -118,34 +136,28 @@ function Search() {
             </a>
           )}
 
-          {/* 🧱 Masonry Grid */}
-          <div className="grid">
-            {!loading && recipes.length > 0 ? (
-              recipes.map((r) => (
-                <div key={r.idMeal} className="grid-item">
+          <div style={{ marginTop: "2rem" }}>
+            {!loading && recipes.length === 0 && ingredient && (
+              <p>No recipes found for “{ingredient}”</p>
+            )}
+
+            <Masonry
+              breakpointCols={breakpointColumnsObj}
+              className="grid"
+              columnClassName="grid-column"
+            >
+              {recipes.map((r) => (
+                <div className="grid-item" key={r.idMeal}>
                   <img
                     src={r.strMealThumb}
-                    //src="https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg"
                     alt={r.strMeal}
                     className="grid-item-image"
                   />
                   <div className="grid-item-title">{r.strMeal}</div>
                 </div>
-              ))
-            ) : (
-              !loading &&
-              ingredient && <p>No recipes found for "{ingredient}"</p>
-            )}
+              ))}
+            </Masonry>
           </div>
-
-          <div style={{ width: 300, height: 300, border: "2px solid blue" }}>
-            <img
-              src="https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg"
-              alt="Test"
-              style={{ width: "100%", height: "auto" }}
-            />
-          </div>
-
         </div>
       </div>
     </div>
