@@ -1906,7 +1906,8 @@ b {
 .grid {
   display: flex;
   position: relative;
-  margin-left: -1.5rem; /* gutter offset */
+  margin-left: .5rem; /* gutter offset */
+margin-right: 1.5rem;
   margin-top: 100px;
   width: auto;
   padding-top: 150px;
@@ -1945,4 +1946,6 @@ b {
   text-align: center;
   font-size: 1rem;
   color: #333;
+
+  
 }
