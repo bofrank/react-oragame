@@ -1,25 +1,24 @@
 import React, { useState } from "react";
 import bgImage from "../assets/cabinet-contemporary-counter-1080721.jpg";
 
-const APP_ID = "5fb37b30";
-const APP_KEY = "f3060af875eda52baf4d68b1fdbdbf43";
-
 function Search() {
   const [ingredient, setIngredient] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [promo, setPromo] = useState(null);
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     await loadRecipes();
-  }
+  };
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     setIngredient(e.target.value);
-  }
+  };
 
-  async function loadRecipes() {
+  const loadRecipes = async () => {
+    if (!ingredient.trim()) return;
+
     setLoading(true);
     setRecipes([]);
 
@@ -29,7 +28,10 @@ function Search() {
       const response = await fetch(recipeUrl);
       const data = await response.json();
 
-      // Promo logic
+      // ✅ TheMealDB returns data.meals (array or null)
+      setRecipes(data.meals || []);
+
+      // 🎁 Promo logic (unchanged)
       let promoHTML = null;
       if (ingredient === "lemon") {
         promoHTML = {
@@ -57,22 +59,18 @@ function Search() {
       }
 
       setPromo(promoHTML);
-      setRecipes(data.hits || []);
     } catch (err) {
       console.error("fetch failed", err);
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="section-header">
       <div id="hero" className="section-home">
         <div id="hero-bg">
-          <div
-            className="bg"
-            style={{ backgroundImage: `url(${bgImage})` }}
-          />
+          <div className="bg" style={{ backgroundImage: `url(${bgImage})` }} />
         </div>
 
         <div id="hero-gradient" />
@@ -80,7 +78,10 @@ function Search() {
         <div id="hero-search">
           <h2>Discover the best recipes</h2>
 
-          <form onSubmit={handleSubmit} className="container-fluid container-constrain">
+          <form
+            onSubmit={handleSubmit}
+            className="container-fluid container-constrain"
+          >
             <div className="row row-condensed">
               <div className="col-sm-12">
                 <div className="form-element">
@@ -103,46 +104,48 @@ function Search() {
               href={promo.link}
               target="_blank"
               rel="noreferrer"
-              className="item photo"
+              className="item photo promo-card"
             >
               <div className="content">
-                <img src={promo.image} alt={promo.title} className="grid-item-image" />
+                <img
+                  src={promo.image}
+                  alt={promo.title}
+                  className="grid-item-image"
+                />
                 <div className="grid-item-title">{promo.title}</div>
                 <div className="grid-text">{promo.text}</div>
               </div>
             </a>
           )}
 
+          {/* 🧱 Masonry Grid */}
           <div className="grid">
-            {recipes.length > 0 ? (
-              recipes.map((r, index) => (
-                <a
-                  key={index}
-                  href={r.recipe.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="item photo"
-                >
-                  <div className="content">
-                    <img
-                      src={r.recipe.image}
-                      alt={r.recipe.label}
-                      className="grid-item-image"
-                    />
-                    <div className="grid-item-title">{r.recipe.label}</div>
-                    <div className="grid-text">
-                      {r.recipe.ingredientLines.map((ing, i) => (
-                        <div key={i}>{ing}</div>
-                      ))}
-                    </div>
-                  </div>
-                </a>
+            {!loading && recipes.length > 0 ? (
+              recipes.map((r) => (
+                <div key={r.idMeal} className="grid-item">
+                  <img
+                    src={r.strMealThumb}
+                    //src="https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg"
+                    alt={r.strMeal}
+                    className="grid-item-image"
+                  />
+                  <div className="grid-item-title">{r.strMeal}</div>
+                </div>
               ))
             ) : (
               !loading &&
               ingredient && <p>No recipes found for "{ingredient}"</p>
             )}
           </div>
+
+          <div style={{ width: 300, height: 300, border: "2px solid blue" }}>
+            <img
+              src="https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg"
+              alt="Test"
+              style={{ width: "100%", height: "auto" }}
+            />
+          </div>
+
         </div>
       </div>
     </div>
