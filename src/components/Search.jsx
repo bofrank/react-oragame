@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Masonry from "react-masonry-css";
-import bgImage from "../assets/cabinet-contemporary-counter-1080721.jpg";
+import logo from "../assets/oragame.png";
+import nounBerries from "../assets/noun_berries_481390.png";
+import adagio from "../assets/adagio.png";
 
 // API: https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken
 
@@ -73,12 +75,23 @@ function Search() {
   return (
     <div className="section-header">
       <div id="hero" className="section-home">
-        <div id="hero-bg">
-          <div
-            className="bg"
-            style={{ backgroundImage: `url(${bgImage})` }}
-          />
-        </div>
+
+        <header className="site-header">
+          <div className="container-fluid">
+            <span id="menu-toggle">
+              <i className="hamburger"></i> 
+            </span>
+            <img alt="Oragame" src={logo} style={{paddingTop:10 + 'px',height:60 + 'px'}} />
+          </div>
+          <div id="birdhouse" className="">  
+            <img src={nounBerries} alt="berries by Imogen Oh from the Noun Project" />
+            <p>Our Affiliates</p>
+          </div>
+          <div id="birdhouse-popup" style={{display:'none'}}>
+            <p>Oraga.me is part of Adagio family, the world leader in tea with over 1 million listings and tea. We offer the largest selection of teas for any recipe. We’re committed to helping chefs find a perfect recipe to create unforgettable food experiences with tea.</p>
+            <a href="http://www.kqzyfj.com/click-7903156-241010" target="_blank"><img alt="Adagio Teas" src={adagio} style={{width:252 + 'px',height:55 + 'px'}} /></a>
+          </div>
+        </header>
 
         <div id="hero-gradient" />
 

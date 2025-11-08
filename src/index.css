@@ -1026,7 +1026,7 @@ b {
   margin: 0 5%;
   font-size: 2.2857142857em;
   font-weight: bold;
-  visibility: hidden;
+  visibility: visible;
   cursor: default;
 }
 .font-load #hero h2,
