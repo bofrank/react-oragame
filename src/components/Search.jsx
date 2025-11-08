@@ -23,7 +23,7 @@ function Search() {
     setLoading(true);
     setRecipes([]);
 
-    const recipeUrl = `https://api.edamam.com/search?app_id=${APP_ID}&app_key=${APP_KEY}&q=${ingredient}`;
+    const recipeUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
 
     try {
       const response = await fetch(recipeUrl);
