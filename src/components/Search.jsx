@@ -83,7 +83,7 @@ function Search() {
         id="hero"
         className="section-home"
         style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(10,10,10,0.1), rgba(10,10,10,0.01)), url(${bgImage})`,
+          backgroundImage: `linear-gradient(to bottom, rgba(10,10,10,0.5), rgba(10,10,10,0.01)), url(${bgImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           paddingBottom: "4rem", // ensures grid isn't clipped
