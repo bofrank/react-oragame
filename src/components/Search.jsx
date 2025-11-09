@@ -124,7 +124,7 @@ function Search() {
 
         {/* Search */}
         <div id="hero-search" style={{ marginTop: "2rem" }}>
-          <h2>Discover the best recipes</h2>
+          <h2>Discover new recipes</h2>
           <form
             onSubmit={handleSubmit}
             className="container-fluid container-constrain"
@@ -187,14 +187,16 @@ function Search() {
             columnClassName="grid-column"
           >
             {recipes.map((r) => (
-              <div className="grid-item" key={r.idMeal}>
-                <img
-                  src={r.strMealThumb}
-                  alt={r.strMeal}
-                  className="grid-item-image"
-                  loading="lazy"
-                />
-                <div className="grid-item-title">{r.strMeal}</div>
+              <div className="grid-item" key={r.idMeal} >
+                <a href={`https://www.themealdb.com/meal/${r.idMeal}`} target='_blank'>
+                  <img
+                    src={r.strMealThumb}
+                    alt={r.strMeal}
+                    className="grid-item-image"
+                    loading="lazy"
+                  />
+                  <div className="grid-item-title">{r.strMeal}</div>
+                </a>
               </div>
             ))}
           </Masonry>
