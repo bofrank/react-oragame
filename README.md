@@ -2,6 +2,12 @@
 
 Find recipes by ingredient! A simple and intuitive app to discover what you can cook with the ingredients you have on hand.
 
+## Why I Built This
+
+I wanted a fast, low-friction way to answer a very simple everyday question: *“What can I cook with what I already have?”* Instead of forcing users to browse through random recipe lists, this app starts from a single ingredient and builds outward, helping you discover recipes you can actually make right now.
+
+What makes this project unique is its focus on ingredient-first discovery and its use of a public recipe database as the sole source of truth. You can type in almost any ingredient, and the app will query a public API to return real recipes that match, rather than a fixed, hand-curated list. This keeps the experience lightweight, always up to date, and easy to extend for new data sources or UI ideas in the future.
+
 ## 🚀 Live Demo
 
 [View the app](http://oraga.me)
